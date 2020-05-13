@@ -1,7 +1,17 @@
 class WorksController < ApplicationController
   
   def index 
-    @works = Work.all
+    @movies = Work.movies
+    @books = Work.books
+    @albums = Work.albums
+  end
+
+  def home 
+    @movies = Work.movies[0..10]
+    @books = Work.books[0..10]
+    @albums = Work.albums[0..10]
+
+    @spotlight = Work.media_spotlight
   end
   
   def show 
