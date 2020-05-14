@@ -6,7 +6,7 @@
   
   <section>
     <%= link_to 'Back to media ranks', works_path, class: "btn btn-primary" %>
-    <p> TODO link to edit </p>
+    <%= link_to 'Edit', edit_work_path(@work.id), class: "btn btn-primary" %>
     <p> TODO link to upvote </p>
     <p> TODO link to delete </p>
   </section>
