@@ -53,6 +53,13 @@ describe Work do
       expect(@work.valid?).must_equal false
       expect(@work.errors.messages).must_include :publication_year
     end
+
+    it 'is invalid if publication year is not a number' do
+      @work.publication_year = 'taco'
+      
+      expect(@work.valid?).must_equal false
+      expect(@work.errors.messages).must_include :publication_year
+    end
   end
   
   

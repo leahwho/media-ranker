@@ -1,1 +1,84 @@
-<h1>all works will be listed here</h1>
+<h2>All Media on Media Ranker!</h2>
+
+<section class='media table'>
+  <h4>Albums</h4>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th width='80'>Votes</th>
+          <th>Title</th>
+          <th>Created By</th>
+          <th width='100'>Published</th>
+          <th width='100'>Upvote</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @albums.each do |album| %>
+          <tr>
+            <td> # </td>
+            <td><%= album.title %></td>
+            <td><%= album.creator %></td>
+            <td><%= album.publication_year%></td>
+            <td> Upvote Link Here </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</section>
+
+<section class='media table'>
+  <h4>Books</h4>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th width='80'>Votes</th>
+          <th>Title</th>
+          <th>Created By</th>
+          <th width='100'>Published</th>
+          <th width='100'>Upvote</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @books.each do |book| %>
+          <tr>
+            <td> # </td>
+            <td><%= book.title %></td>
+            <td><%= book.creator %></td>
+            <td><%= book.publication_year%></td>
+            <td> Upvote Link Here </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</section>
+
+<section class='media table'>
+  <h4>Movies</h4>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th width='80'>Votes</th>
+          <th>Title</th>
+          <th>Created By</th>
+          <th width='100'>Published</th>
+          <th width='100'>Upvote</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @movies.each do |movie| %>
+          <tr>
+            <td> # </td>
+            <td><%= movie.title %></td>
+            <td><%= movie.creator %></td>
+            <td><%= movie.publication_year%></td>
+            <td> Upvote Link Here </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</section>
+
+<%# TODO: Add buttons to go back to TOP MEDIA%>
+<%# TODO: Add buttons to go back to ADD MEDIA%>
+
+</main>
