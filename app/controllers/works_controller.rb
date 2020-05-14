@@ -5,12 +5,12 @@ class WorksController < ApplicationController
     @books = Work.books
     @albums = Work.albums
   end
-
+  
   def home 
     @movies = Work.movies[0..10]
     @books = Work.books[0..10]
     @albums = Work.albums[0..10]
-
+    
     @spotlight = Work.media_spotlight
   end
   
@@ -28,7 +28,7 @@ class WorksController < ApplicationController
   end
   
   def create
-    @work = Work.new(work_params)
+    @work = Work.new(works_params)
     
     if @work.save
       flash[:success] = "#{@work.title} was successfully saved."
@@ -42,7 +42,7 @@ class WorksController < ApplicationController
   
   def edit
     @work = Work.find_by(id: params[:id])
-
+    
     if @work.nil?
       head :not_found
       return
@@ -51,11 +51,11 @@ class WorksController < ApplicationController
   
   def update
     @work = Work.find_by(id: params[:id])
-
+    
     if @work.nil?
       head :not_found
       return
-    elsif @work.update(work_params)
+    elsif @work.update(works_params)
       flash[:success] = "#{@work.title} was successfully saved!"
       redirect_to work_path(@work.id)
     else
@@ -66,7 +66,7 @@ class WorksController < ApplicationController
   
   def destroy
     @work = Work.find_by(id: params[:id])
-
+    
     if @work.nil?
       head :not_found
       return

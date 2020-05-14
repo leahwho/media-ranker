@@ -1,1 +1,32 @@
-<h1>This will be where individual works/media will display</h1>
+<section>
+  <h2><%= @work.title %></h2>
+    <p> Created by: <%= @work.creator %></p>
+    <p> Published: <%= @work.publication_year %></p>
+    <p> <%= @work.description %></p>
+  
+  <section>
+    <%= link_to 'Back to media ranks', works_path, class: "btn btn-primary" %>
+    <p> TODO link to edit </p>
+    <p> TODO link to upvote </p>
+    <p> TODO link to delete </p>
+  </section>
+</section>
+
+<section class='works-votes__container'>
+  <h3 class='works-votes__header'>How many votes does this media type have?</h3>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr> 
+        <td>LINK_TO What user voted for this?</td>
+        <td>When did they vote? </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+  
