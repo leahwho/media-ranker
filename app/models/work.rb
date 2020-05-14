@@ -6,7 +6,7 @@ class Work < ApplicationRecord
   validates :description, presence: true
   validates :publication_year, presence: true, numericality: { only_integer: true } 
   
-  def self.media_spotlight 
+  def self.media_spotlight
     @spotlight = Work.all
     
     return @spotlight.sample
