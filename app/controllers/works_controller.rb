@@ -37,6 +37,7 @@ class WorksController < ApplicationController
     else 
       flash.now[:error] = "A problem occurred: This #{@work.category} could not be created."
       render :new, status: :bad_request
+      return
     end
   end
   
@@ -58,9 +59,11 @@ class WorksController < ApplicationController
     elsif @work.update(works_params)
       flash[:success] = "#{@work.title} was successfully saved!"
       redirect_to work_path(@work.id)
+      return
     else
       flash.now[:error] = "A problem occurred: This #{@work.category} could not be updated."
       render :edit, status: :bad_request
+      return
     end
   end
   
@@ -70,9 +73,14 @@ class WorksController < ApplicationController
     if @work.nil?
       head :not_found
       return
-    else 
-      @work.destroy
+    elsif @work.destroy
+      flash[:success] = "#{@work.title} was successfully deleted."
       redirect_to root_path
+      return
+    else
+      flash.now[:error] = "A problem occurred: This #{work.category} could not be deleted."
+      redirect_to work_path(@work.id)
+      return
     end
   end
   

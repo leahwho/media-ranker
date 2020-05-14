@@ -7,13 +7,15 @@
   <section>
     <%= link_to 'Back to media ranks', works_path, class: "btn btn-primary" %>
     <%= link_to 'Edit', edit_work_path(@work.id), class: "btn btn-primary" %>
-    <p> TODO link to upvote </p>
-    <p> TODO link to delete </p>
+    <a class: "btn btn-primary"> TODO link to upvote </a>
+    <%= link_to 'Delete This Thang', work_path(@work.id), class: "btn btn-primary", method: :delete, data: {confirm: "Are you sure?"} %>
   </section>
 </section>
 
+
+
 <section class='works-votes__container'>
-  <h3 class='works-votes__header'>How many votes does this media type have?</h3>
+  <h3 class='works-votes__header'>How many votes does this <%= @work.category %> have?</h3>
   <table class='table'>
     <thead>
       <tr>

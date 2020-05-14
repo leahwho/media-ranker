@@ -27,17 +27,25 @@
           <%= link_to 'Add New Media', new_work_path %>
         </li>
         <li class="nav-item app-header__nav_item">
-          Link to View All Users
+          <%# TODO: UPDATE THIS LINK TO GO TO USERS%>
+          <%= link_to 'View All Users', root_path %>
         </li>
       </ul>
+      
       <ul class="nav app-header__user-nav-container">
-
         <li class="nav-item app-header__nav_item">
-          Log In
+          <%# TODO: UPDATE THIS LINK TO GO TO LOGIN%>
+          <%= link_to 'Log In', root_path %>
         </li>
       </ul>
     </nav>
-  
+
+    <section class='errors'>
+      <% flash.each do |name, message| %>
+        <strong class="<%= name %>" ></strong><%= message %>
+      <% end %>
+    </section>
+
     <%= yield %>
   </body>
 </html>
