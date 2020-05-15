@@ -36,7 +36,6 @@ class WorksController < ApplicationController
       return
     else 
       flash.now[:error] = "A problem occurred: This #{@work.category} could not be created."
-      #TODO: Add errors to flash
       render :new, status: :bad_request
       return
     end
@@ -63,7 +62,6 @@ class WorksController < ApplicationController
       return
     else
       flash.now[:error] = "A problem occurred: This #{@work.category} could not be updated."
-      # TODO: Add errors to flash
       render :edit, status: :bad_request
       return
     end
@@ -81,7 +79,6 @@ class WorksController < ApplicationController
       return
     else
       flash.now[:error] = "A problem occurred: This #{work.category} could not be deleted."
-      # TODO: Add errors to flash
       redirect_to work_path(@work.id)
       return
     end

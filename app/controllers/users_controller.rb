@@ -18,19 +18,19 @@ class UsersController < ApplicationController
   end
   
   def login
-    user = User.find_by(username: params[:username])
+    @user = User.find_by(username: params[:username])
     
-    if user # existing user
-      session[:user_id] = user.id
-      flash[:success] = "Login successful. Welcome back, #{user.username}."
-
-    elsif user.nil? # new user
-      user = User.create!(username: params[:username])
-      user.reload
-      session[:user_id] = user.id
-      flash[:success] = "Login successful. Welcome, #{user.username}. So glad you joined us!"
-
-    elsif !user.save
+    if @user # existing user
+      session[:user_id] = @user.id
+      flash[:success] = "Login successful. Welcome back, #{@user.username}."
+      
+    elsif @user.nil? # new user
+      @user = User.create!(username: params[:username])
+      @user.reload
+      session[:user_id] = @user.id
+      flash[:success] = "Login successful. Welcome, #{@user.username}. So glad you joined us!"
+      
+    elsif !@user.save
       flash.now[:error] = 'Unable to login'
       redirect_to root_path
       return
@@ -56,6 +56,18 @@ class UsersController < ApplicationController
     end
     
     redirect_to root_path
+  end
+  
+  def current
+    
+    @user = User.find_by(id: session[:user_id])
+    
+    if @user.nil?
+      flash[:error] = "You must be logged in to view this page."
+      redirect_to root_path
+      return
+    end
+    
   end
   
   private

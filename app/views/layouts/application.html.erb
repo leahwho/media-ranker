@@ -32,7 +32,7 @@
       </ul>
       
       <ul class="nav app-header__user-nav-container">
-      <% if session[:user_id] %>
+      <% if session[:user_id] %> <%# this really should be if @user.nil?%>
         <li class="nav-item app-header__nav_item">
           <%= link_to 'Logout', logout_path, method: :post %>
         <li/>
@@ -47,6 +47,14 @@
     <section class='errors'>
       <% flash.each do |name, message| %>
         <strong class="<%= name %>" ></strong><%= message %>
+      <% end %>
+
+      <% if @work %>
+        <% if @work.errors.any? %>
+          <% @work.errors.each do |column, message| %>
+            <%= flash[:details] = "#{column.capitalize} #{message}." %>
+          <% end %>
+        <% end %>
       <% end %>
     </section>
 
