@@ -17,7 +17,23 @@ class UsersController < ApplicationController
     @users = User.new
   end
 
-  
+  def login
+    user = User.find_by(username: params[:user][:username])
+
+    if user.nil? #new user
+      user = User.new(username: params[:user][:username])
+        if !user.save
+          flash.now[:error] = 'Unable to login'
+          redirect_to root_path
+          return
+        end
+        flash[:welcome] = "Welcome, #{user.username}"
+    else #existing user
+      flash[:welcome] = "Welcome back, #{user.username}"
+    end
+
+    session[:user_id] = user.id
+  end
 
   
   private
