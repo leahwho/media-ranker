@@ -13,6 +13,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def login_form
+    @users = User.new
+  end
+
+  
+
   
   private
   
