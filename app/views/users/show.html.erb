@@ -1,0 +1,26 @@
+<h2>User Summary: <%= link_to @user.name, user_path(@user.id) %></h2>
+<p>Joined site <%= @user.created_at.strftime("%m/%d/%Y") %> </p>
+
+<section class="user-votes__container">
+  <h3 class="user-votes__header">Votes</h3>
+    <table class="table">
+      <tr>
+        <th>Media Title</th>
+        <th>Created By</th>
+        <th>Published</th>
+        <th>Category</th>
+        <th>Voted On</th>
+      </tr>
+
+      <tr>
+        <td>Link to Media</td>
+        <td>Creator</td>
+        <td>Pub Yr</td>
+        <td>Category</td>
+        <td>Voted On</td>
+      </tr>
+    </table>
+</section>
+
+<%= link_to 'See All Users', users_path, class: "btn btn-secondary" %>
+<%= link_to 'Back to Media List', works_path, class: "btn btn-secondary" %>
