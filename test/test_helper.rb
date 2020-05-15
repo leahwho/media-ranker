@@ -21,13 +21,12 @@ class ActiveSupport::TestCase
 
   def login(username = 'Grace Hopper')
     user_hash = {
-      user: {
         username: username
-      }
     }
-
+    
     post login_path, params: user_hash
-    user = User.find_by(username: username)
+    
+    user = User.find_by(username: user_hash[:username])
     return user
   end
 end
