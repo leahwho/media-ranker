@@ -17,18 +17,18 @@
 <section class='works-votes__container'>
   <h3 class='works-votes__header'>How many votes does this <%= @work.category %> have?</h3>
   <table class='table'>
-    <thead>
+    
       <tr>
         <th>User</th>
         <th>Date</th>
       </tr>
-    </thead>
-    <tbody>
+    
+    <% @work.votes.each do |vote| %>
       <tr> 
-        <td>LINK_TO What user voted for this?</td>
-        <td>When did they vote? </td>
+        <td> <%= vote.user.username %> </td>
+        <td> <%= vote.created_at.strftime("%B %d, %Y") %> </td>
       </tr>
-    </tbody>
+    <% end %>
+    
   </table>
 </section>
-  
