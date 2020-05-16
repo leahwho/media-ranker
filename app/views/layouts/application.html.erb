@@ -34,6 +34,9 @@
       <ul class="nav app-header__user-nav-container">
       <% if session[:user_id] %> <%# this really should be if @user.nil?%>
         <li class="nav-item app-header__nav_item">
+        <%= link_to "Logged in as #{session[:username]}", user_path(id: session[:user_id])%> <%# I imagine this will be similar to above %>
+        </li>
+        <li class="nav-item app-header__nav_item">
           <%= link_to 'Logout', logout_path, method: :post %>
         <li/>
       <% else %>

@@ -22,12 +22,14 @@ class UsersController < ApplicationController
     
     if @user # existing user
       session[:user_id] = @user.id
+      session[:username] = @user.username
       flash[:success] = "Login successful. Welcome back, #{@user.username}."
       
     elsif @user.nil? # new user
       @user = User.create!(username: params[:username])
       @user.reload
       session[:user_id] = @user.id
+      session[:username] = @user.username
       flash[:success] = "Login successful. Welcome, #{@user.username}. So glad you joined us!"
       
     elsif !@user.save
@@ -46,9 +48,11 @@ class UsersController < ApplicationController
       user = User.find_by(id: session[:user_id])
       unless user.nil?
         session[:user_id] = nil
+        session[:username] = nil
         flash[:notice] = "Bye, #{user.username}.  See you next time."
       else
         session[:user_id] = nil
+        session[:username] = nil
         flash[:notice] = "Error: Unknown User"
       end
     else
