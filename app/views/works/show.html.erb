@@ -15,7 +15,7 @@
 
 
 <section class='works-votes__container'>
-  <h3 class='works-votes__header'>How many votes does this <%= @work.category %> have?</h3>
+  <h3 class='works-votes__header'><%= @work.votes.count %> votes for this <%= @work.category %> </h3>
   <table class='table'>
     
       <tr>

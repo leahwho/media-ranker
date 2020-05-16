@@ -1,6 +1,6 @@
 <section class='spotlight'>
   <h2 class='spotlight-header'>
-    <span class="spotlight__header--prefix">Media Spotlight:</span> <%= link_to @spotlight.title, work_path(@spotlight.id, class: "spotlight__link-to") %> </h2> <p class="spotlight__description">display the votes - <%= @spotlight.description %> </p>
+    <span class="spotlight__header--prefix">Media Spotlight:</span> <%= link_to @spotlight.title, work_path(@spotlight.id, class: "spotlight__link-to") %> </h2> <p class="spotlight__description"><%= @spotlight.votes.count %> votes - <%= @spotlight.description %> </p>
 </section>
 
 <section class="top-ten__container">
@@ -14,7 +14,7 @@
             <li class='list-group-item'>
               <h4><%= link_to movie.title, work_path(movie.id) %>
               <small class='top-ten__creator'>by <%= movie.creator %></small></h4>
-              <p>How many votes will I get?</p>
+              <p><%= movie.votes.count%> votes</p>
           <% end %>
         <% end %>
       </ul>
@@ -31,7 +31,7 @@
             <li class='list-group-item'>
             <h4><%= link_to book.title, work_path(book.id) %>
             <small class='top-ten__creator'>by <%= book.creator %></small></h4>
-            <p>How many votes will I get?</p>
+            <p><%= book.votes.count%> votes</p>
           <% end %>
         <% end %>
       </ul>
@@ -48,7 +48,7 @@
             <li class='list-group-item'>
             <h4><%= link_to album.title, work_path(album.id) %>
             <small class='top-ten__creator'>by <%= album.creator %></small></h4>
-            <p>How many votes will I get?</p>
+            <p><%= album.votes.count%> votes</p>
           <% end %>
         <% end %>
       </ul>
