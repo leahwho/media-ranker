@@ -1,18 +1,21 @@
 class VotesController < ApplicationController
   
+  def vote_check(work)
+    user = User.find_by(id: session[:user_id])
+    duplicates = user.votes.select { |vote| vote.work_id == work.id}
+    
+    return true if duplicates.empty?
+    
+    return false
+  end
   
   def create
     # find the user and the work
     user = User.find_by(id: session[:user_id])
     work = Work.find_by(id: params[:work_id])
     
-    # TODO: need to also add if a user has already voted for the work (e.g. that vote for that work already exists in the database), flash them a message that they have already voted and can't vote again.
-    
-    # maybe create a helper method to check if the vote is in the database already?
-    
-    
     # if the user is logged in
-    if session[:user_id]
+    if session[:user_id] && vote_check(work)
       #create a new vote for those objects
       vote = Vote.create(user_id: user.id, work_id: work.id)
       # if the work saves
@@ -28,6 +31,10 @@ class VotesController < ApplicationController
         return
       end
       # if there is no user logged in
+    elsif !vote_check(work)
+      flash[:error] = 'You already voted for this!'
+      redirect_to request.referrer || work_path(work.id)
+      return
     elsif !session[:user_id]
       # tell them they need to log in and redirect to who sent them there
       flash[:error] = 'A problem occurred. You must be logged in to vote.'
