@@ -1,7 +1,7 @@
 class Work < ApplicationRecord
   has_many :votes
   has_many :users, through: :votes
-
+  
   validates :title, presence: true
   validates :category, presence: true
   validates :creator, presence: true
@@ -9,26 +9,24 @@ class Work < ApplicationRecord
   validates :publication_year, presence: true, numericality: { only_integer: true } 
   
   def self.media_spotlight
-    @spotlight = Work.all
+    @spotlight = Work.all.sort_by { |work| work.votes.count }
     
-    return @spotlight.sample
+    return @spotlight.last
   end
   
   def self.movies
-    return Work.where(category: 'movie')
-    #TODO: figure out how to order and return by vote count
-  end
-
-  def self.books
-    return Work.where(category: 'book')
-    #TODO: figure out how to order and return by vote count
-  end
-
-  def self.albums
-    return Work.where(category: 'album')
-    #TODO: figure out how to order and return by vote count
+    movies = Work.where(category: 'movie').sort_by { |movie| movie.votes.count }
+    return movies.reverse
   end
   
-
-
+  def self.books
+    books = Work.where(category: 'book').sort_by { |book| book.votes.count }
+    return books.reverse  
+  end
+  
+  def self.albums
+    albums = Work.where(category: 'album').sort_by { |album| album.votes.count }
+    return albums.reverse  
+  end
+  
 end
