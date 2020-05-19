@@ -90,6 +90,11 @@ describe Work do
         expect(Work.books).must_include works(:oryx)
       end
       
+      it "sorts categories by vote count" do
+        # expect specific 
+
+      end
+
     end
     
   end

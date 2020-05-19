@@ -89,4 +89,32 @@ describe Vote do
     
   end
   
+  describe 'custom methods' do
+    describe 'recent user votes' do
+      
+      it 'returns most recent votes by a user first' do
+        vote1 = Vote.create(user_id: users(:katie).id, work_id: works(:oryx).id, created_at: Date.today - 1)
+        vote2 = Vote.create(user_id: users(:katie).id, work_id: works(:blackstar).id, created_at: Date.today)
+        
+        user = users(:katie)
+        result = user.votes.recent_user_votes(user.id)
+
+        expect(result[0].created_at > result[1].created_at).must_equal true
+      end
+            
+    end
+
+    describe 'recent work votes' do
+      it 'returns the most recent votes for the same work first' do
+        vote1 = Vote.create(user_id: users(:katie).id, work_id: works(:oryx).id, created_at: Date.today - 1)
+        vote2 = Vote.create(user_id: users(:leah).id, work_id: works(:oryx).id, created_at: Date.today)
+
+        work = works(:oryx)
+        result = work.votes.recent_work_votes(work.id)
+
+        expect(result[0].created_at > result[1].created_at).must_equal true
+      end
+    end
+  end
+  
 end

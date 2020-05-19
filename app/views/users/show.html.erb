@@ -12,7 +12,7 @@
         <th>Voted On</th>
       </tr>
 
-  <% @user.votes.most_recent(@user.id).each do |vote| %>
+  <% @user.votes.recent_user_votes(@user.id).each do |vote| %>
       <tr>
         <td> <%= link_to vote.work.title, work_path(vote.work_id) %> </td>
         <td> <%= vote.work.creator %> </td>

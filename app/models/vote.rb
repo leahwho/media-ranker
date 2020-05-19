@@ -5,15 +5,14 @@ class Vote < ApplicationRecord
   validates :user_id, presence: true
   validates :work_id, presence: true, uniqueness: { scope: :user_id }
   
-  def self.most_recent(id)
+  def self.recent_user_votes(id)
     @user = User.find_by(id: id)
-    @work = Work.find_by(id: id)
-
-    if @user
-      return @user.votes.order('created_at DESC')
-    elsif @work
-      return @work.votes.order('created_at DESC')
-    end
+    return @user.votes.order('created_at DESC')
   end
-
+  
+  def self.recent_work_votes(id)
+    @work = Work.find_by(id: id)
+    return @work.votes.order('created_at DESC')
+  end
+  
 end

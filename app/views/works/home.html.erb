@@ -4,24 +4,10 @@
 </section>
 
 
-
-
 <section class="top-ten__container">
   <section class='top-ten__header'>
-  <% [@books, @movies, @albums].each do |category|  %>
-    <h2 class="top-ten__header">Top HOW TO LIST THE CATEGORY????</h2>
-      <ul class='list-group top_ten__list'>
-        <% if category.empty? %>
-          <li class="list-group-item">There are no works in the ranking system!  Would you like to add one?</li>
-        <% else %>
-          <% category.each do |item| %>
-            <li class='list-group-item'>
-              <h4><%= link_to item.title, work_path(item.id) %>
-              <small class='top-ten__creator'>by <%= item.creator %></small></h4>
-              <p><%= item.votes.count%> votes</p>
-          <% end %>
-        <% end %>
-      </ul>
-    <% end %>
+  <%= render partial: 'topten', locals: {category: @books, name: "Books"} %>
+  <%= render partial: 'topten', locals: {category: @movies, name: "Movies"}%>
+  <%= render partial: 'topten', locals: {category: @albums, name: "Albums"}%>
   </section>    
 </section>

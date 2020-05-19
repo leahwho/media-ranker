@@ -1,71 +1,9 @@
 <h2>All Media on Media Ranker!</h2>
 
-<h4>Albums</h4>
-<section class='media table'>
-  <table class='table'>
-    <tr>
-      <th width='80'>Votes</th>
-      <th>Title</th>
-      <th>Created By</th>
-      <th width='100'>Published</th>
-      <th width='100'>Upvote</th>
-    </tr>
-  
-    <% @albums.each do |album| %>
-      <tr>
-        <td> <%= album.votes.count %> </td>
-        <td><%= link_to album.title, work_path(album.id) %></td>
-        <td><%= album.creator %></td>
-        <td><%= album.publication_year%></td>
-        <td> <%= link_to 'Upvote', work_votes_path(album.id), class: "btn btn-primary", method: :post %> </td>
-      </tr>
-    <% end %>
-  </table>
-</section>
+<%= render partial: 'all_index', locals: {category: @albums, name: "Albums"} %>
+<%= render partial: 'all_index', locals: {category: @books, name: "Books"} %>
+<%= render partial: 'all_index', locals: {category: @movies, name: "Movies"} %>
 
-<h4>Books</h4>
-<section class='media table'>
-  <table class='table'>
-    <tr>
-      <th width='80'>Votes</th>
-      <th>Title</th>
-      <th>Created By</th>
-      <th width='100'>Published</th>
-      <th width='100'>Upvote</th>
-    </tr>
-    <% @books.each do |book| %>
-      <tr>
-        <td> <%= book.votes.count %> </td>
-        <td><%= link_to book.title, work_path(book.id) %></td>
-        <td><%= book.creator %></td>
-        <td><%= book.publication_year%></td>
-        <td> <%= link_to 'Upvote', work_votes_path(book.id), class: "btn btn-primary", method: :post %> </td>
-      </tr>
-    <% end %>
-  </table>
-</section>
-
-<h4>Movies</h4>
-<section class='media table'>
-  <table class='table'>
-    <tr>
-      <th width='80'>Votes</th>
-      <th>Title</th>
-      <th>Created By</th>
-      <th width='100'>Published</th>
-      <th width='100'>Upvote</th>
-    </tr>
-    <% @movies.each do |movie| %>
-      <tr>
-        <td> <%= movie.votes.count %> </td>
-        <td><%= link_to movie.title, work_path(movie.id) %></td>
-        <td><%= movie.creator %></td>
-        <td><%= movie.publication_year%></td>
-        <td> <%= link_to 'Upvote', work_votes_path(movie.id), class: "btn btn-primary", method: :post %> </td>
-      </tr>
-    <% end %>
-  </table>
-</section>
 
 <%= link_to 'Top Media', root_path, class: 'btn btn-primary' %>
 <%= link_to 'Add Media', new_work_path, class: 'btn btn-primary'%>

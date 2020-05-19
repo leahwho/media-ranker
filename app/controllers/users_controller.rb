@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   before_action :require_login, only: [:current]
-  before_action :find_user, only: [:current, :show, :logout]
+  before_action :find_user, only: [:current, :logout]
   
   
   def index
@@ -9,6 +9,8 @@ class UsersController < ApplicationController
   end
   
   def show
+    @user = User.find_by(id: params[:id])
+
     if @user.nil?
       head :not_found
       return

@@ -23,7 +23,7 @@
         <th>Date</th>
       </tr>
     
-    <% @work.votes.most_recent(@work.id).each do |vote| %>
+    <% @work.votes.recent_work_votes(@work.id).each do |vote| %>
       <tr> 
         <td> <%= link_to vote.user.username, user_path(vote.user_id) %> </td>
         <td> <%= vote.created_at.strftime("%B %d, %Y") %> </td>
