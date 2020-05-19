@@ -72,16 +72,22 @@ describe Work do
       end
       
       it 'returns the correct work' do
-        
+        new_vote = Vote.create!(user_id: users(:katie).id, work_id: works(:moonstruck).id)
+
+        expect(Work.media_spotlight.title).must_equal 'Moonstruck'
+
+        new_vote2 = Vote.create!(user_id: users(:jared).id, work_id: works(:blackstar).id)
+        new_vote3 = Vote.create!(user_id: users(:leah).id, work_id: works(:blackstar).id)
+        expect(Work.media_spotlight.title).must_equal 'Blackstar'
       end     
-      
-      # if there are no votes, it returns nil?
-      
+            
     end
     
     describe 'categories' do
       it "puts work into correct category" do
-        
+        expect(Work.movies).must_include works(:brazil)
+        expect(Work.albums).must_include works(:blackstar)
+        expect(Work.books).must_include works(:oryx)
       end
       
     end

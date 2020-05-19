@@ -26,21 +26,18 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       session[:username] = @user.username
       flash[:success] = "Login successful. Welcome back, #{@user.username}."
-      
     elsif @user.nil? # new user
       @user = User.create!(username: params[:username])
-      # check to see if the user has an ID
-      # if they DO - keep going herrrre
-      # but if they don't, then you can say that we cannot log you in
-      @user.reload
-      session[:user_id] = @user.id
-      session[:username] = @user.username
-      flash[:success] = "Login successful. Welcome, #{@user.username}. So glad you joined us!"
-      
-    elsif !@user.save # Devin says this will not ever happen - so, figure this out!
-      flash.now[:error] = 'Unable to login'
-      redirect_to root_path
-      return
+      if @user.id
+        @user.reload
+        session[:user_id] = @user.id
+        session[:username] = @user.username
+        flash[:success] = "Login successful. Welcome, #{@user.username}. So glad you joined us!"
+      else
+        flash.now[:error] = 'Unable to login'
+        redirect_to root_path
+        return
+      end
     end
     
     redirect_to root_path
@@ -59,8 +56,6 @@ class UsersController < ApplicationController
         session[:username] = nil
         flash[:notice] = "Error: Unknown User"
       end
-    else
-      flash[:error] = "You must be logged in to log out!"
     end
     
     redirect_to root_path

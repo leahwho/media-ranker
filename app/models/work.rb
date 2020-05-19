@@ -21,8 +21,8 @@ class Work < ApplicationRecord
   end
   
   def self.movies
-    return Work.where(category: 'movie').sort_by { |movie| movie.votes.count }.order(votes: :desc)
-    # return movies.reverse
+    return Work.where(category: 'movie').sort_by { |movie| movie.votes.count }
+    return movies.reverse
   end
   
   def self.books

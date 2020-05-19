@@ -39,13 +39,21 @@ describe Vote do
       expect(@vote.errors.messages).must_include :user_id
     end
     
-    it 'is invalid without a unique work id' do
-      duplicate_vote = Vote.create(user_id: @user.id, work_id: @work.id)
-
-      expect(duplicate_vote.valid?).must_equal false
-      expect(duplicate_vote.errors.messages).must_include :work_id
+    it 'allows multiple users to vote for the same work' do
+      vote1 = Vote.create(user_id: users(:leah).id, work_id: works(:oryx).id)
+      vote2 = Vote.create(user_id: users(:jared).id, work_id: works(:oryx).id)
+      
+      expect(vote1.valid?).must_equal true
+      expect(vote2.valid?).must_equal true
     end
-
+    
+    it 'does not allow a user to vote for a work more than once' do
+      vote1 = Vote.create(user_id: users(:katie).id, work_id: works(:oryx).id)
+      vote2 = Vote.create(user_id: users(:katie).id, work_id: works(:oryx).id)
+      
+      expect(vote1.valid?).must_equal true
+      expect(vote2.valid?).must_equal false
+    end
   end
   
   describe 'relationships' do
@@ -54,28 +62,28 @@ describe Vote do
       @work = works(:blackstar)
       @user = users(:katie)
     end
-
+    
     it 'can set the work through .work' do
       @vote.work = @work
-
+      
       expect(@vote.work_id).must_equal @work.id
     end
-
+    
     it 'can set the work through .work_id' do
       @vote.work_id = @work.id
-
+      
       expect(@vote.work).must_equal @work
     end
-
+    
     it 'can set the user through .user' do
       @vote.user = @user
-
+      
       expect(@vote.user_id).must_equal @user.id
     end
-
+    
     it 'can set the user through .user_id' do
       @vote.user_id = @user.id
-
+      
       expect(@vote.user).must_equal @user
     end
     
