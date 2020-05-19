@@ -1,5 +1,7 @@
 class VotesController < ApplicationController
   
+  before_action :require_login, only: [:create]
+
   def create
     user = User.find_by(id: session[:user_id])
     work = Work.find_by(id: params[:work_id])

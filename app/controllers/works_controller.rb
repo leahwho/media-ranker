@@ -1,6 +1,6 @@
 class WorksController < ApplicationController
   
-  before_action :find_work, only: [:destroy, :show, :edit, :update,]
+  before_action :find_work, only: [:destroy, :show, :edit, :update]
 
   def index 
     @movies = Work.movies

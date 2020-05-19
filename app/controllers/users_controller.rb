@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
   
+  skip_before_action :require_login, only: [:login, :login_form]
   before_action :find_user, only: [:current, :show, :logout]
-
+  before_action :require_login, only: [:current]
+  
   def index
     @users = User.all
   end
   
   def show
-    @user = User.find_by(id: params[:id])
-    
     if @user.nil?
       head :not_found
       return
@@ -29,12 +29,15 @@ class UsersController < ApplicationController
       
     elsif @user.nil? # new user
       @user = User.create!(username: params[:username])
+      # check to see if the user has an ID
+      # if they DO - keep going herrrre
+      # but if they don't, then you can say that we cannot log you in
       @user.reload
       session[:user_id] = @user.id
       session[:username] = @user.username
       flash[:success] = "Login successful. Welcome, #{@user.username}. So glad you joined us!"
       
-    elsif !@user.save
+    elsif !@user.save # Devin says this will not ever happen - so, figure this out!
       flash.now[:error] = 'Unable to login'
       redirect_to root_path
       return
@@ -47,11 +50,10 @@ class UsersController < ApplicationController
   
   def logout
     if session[:user_id]
-      user = User.find_by(id: session[:user_id])
-      unless user.nil?
+      unless @user.nil?
         session[:user_id] = nil
         session[:username] = nil
-        flash[:notice] = "Bye, #{user.username}.  See you next time."
+        flash[:notice] = "Bye, #{@user.username}.  See you next time."
       else
         session[:user_id] = nil
         session[:username] = nil
@@ -65,8 +67,6 @@ class UsersController < ApplicationController
   end
   
   def current
-    @user = User.find_by(id: session[:user_id])
-    
     if @user.nil?
       flash[:error] = "You must be logged in to view this page."
       redirect_to root_path
@@ -80,7 +80,7 @@ class UsersController < ApplicationController
   def users_params
     return params.require(:user).permit(:username, :created_at)
   end
-
+  
   def find_user
     @user = User.find_by(id: session[:user_id])
   end

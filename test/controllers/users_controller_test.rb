@@ -33,7 +33,7 @@ describe UsersController do
       }.wont_change "User.count"
     end
 
-    it 'can logouot an existing user' do
+    it 'can logout an existing user' do
       login()
       expect(session[:user_id]).wont_be_nil
 
@@ -56,7 +56,7 @@ describe UsersController do
       get current_user_path
 
       must_respond_with :redirect
-      expect(flash[:error].must_equal "You must be logged in to view this page.")
+      expect(flash[:error].must_equal "Sorry, you need to be logged in to do that.")
     end
   end
 
