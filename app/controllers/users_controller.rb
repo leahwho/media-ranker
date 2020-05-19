@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   
+  before_action :find_user, only: [:current, :show, :logout]
+
   def index
     @users = User.all
   end
@@ -63,7 +65,6 @@ class UsersController < ApplicationController
   end
   
   def current
-    
     @user = User.find_by(id: session[:user_id])
     
     if @user.nil?
@@ -78,6 +79,10 @@ class UsersController < ApplicationController
   
   def users_params
     return params.require(:user).permit(:username, :created_at)
+  end
+
+  def find_user
+    @user = User.find_by(id: session[:user_id])
   end
   
 end

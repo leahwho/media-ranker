@@ -11,6 +11,7 @@ class Work < ApplicationRecord
   def self.media_spotlight
     @spotlight = Work.all.sort_by { |work| work.votes.count }
     
+    # if @spotlight.last.votes.count == 0 ??
     return @spotlight.last
   end
   

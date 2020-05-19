@@ -10,52 +10,54 @@
   </head>
 
   <body>
-    <h1 class='app-header__header'>
-      <%= link_to 'Media Ranker', root_path %>
-      <small>Ranking the Best of Everything</small>
-    </h1>
+    <header class='app-header'>
+      <h1 class='app-header__header'>
+        <%= link_to 'Media Ranker', root_path %>
+        <small>Ranking the Best of Everything</small>
+      </h1>
 
-    <nav class="app-header__nav">
-      <ul class="nav app-header__site-nav-container">
-        <li class="nav-item app-header__nav_item">
-          <%= link_to 'View Top Media', root_path %>
-        </li>
-        <li class="nav-item app-header__nav_item">
-          <%= link_to 'View All Media', works_path %>
-        </li>
-        <li class="nav-item app-header__nav_item">
-          <%= link_to 'Add New Media', new_work_path %>
-        </li>
-        <li class="nav-item app-header__nav_item">
-          <%= link_to 'View All Users', users_path %>
-        </li>
-      </ul>
-      
-      <ul class="nav app-header__user-nav-container">
-      <% if session[:user_id] %> <%# this really should be if @user.nil?%>
-        <li class="nav-item app-header__nav_item">
-        <%= link_to "Logged in as #{session[:username]}", user_path(id: session[:user_id])%> <%# I imagine this will be similar to above %>
-        </li>
-        <li class="nav-item app-header__nav_item">
-          <%= link_to 'Logout', logout_path, method: :post %>
-        <li/>
-      <% else %>
-        <li class="nav-item app-header__nav_item">
-          <%= link_to 'Log In', login_path %>
-        </li>
-      <% end %>
-      </ul>
-    </nav>
+      <nav class="navbar navbar-expand-lg">
+        <ul class="nav app-header__site-nav-container">
+          <li class="navbar-text">
+            <%= link_to 'View Top Media', root_path %>
+          </li>
+          <li class="navbar-text">
+            <%= link_to 'View All Media', works_path %>
+          </li>
+          <li class="navbar-text">
+            <%= link_to 'Add New Media', new_work_path %>
+          </li>
+          <li class="navbar-text">
+            <%= link_to 'View All Users', users_path %>
+          </li>
+        </ul>
+        
+        <ul class="nav app-header__user-nav-container">
+        <% if session[:user_id] %> <%# this really should be if @user.nil?%>
+          <li class="navbar-text">
+          <%= link_to "Logged in as #{session[:username]}", user_path(id: session[:user_id])%> <%# I imagine this will be similar to above %>
+          </li>
+          <li class="navbar-text">
+            <%= link_to 'Logout', logout_path, method: :post %>
+          <li/>
+        <% else %>
+          <li class="navbar-text">
+            <%= link_to 'Log In', login_path %>
+          </li>
+        <% end %>
+        </ul>
+      </nav>
+    </header>
 
     <section class='errors'>
       <% flash.each do |name, message| %>
-        <strong class="<%= name %>" ></strong><%= message %>
+        <strong class="alert alert-<%= name %>" ><%= message %></strong>
       <% end %>
 
       <% if @work %>
         <% if @work.errors.any? %>
           <% @work.errors.each do |column, message| %>
-            <%= flash[:details] = "#{column.capitalize} #{message}." %>
+            <%= flash.now[:details] = "#{column.capitalize} #{message}."%>
           <% end %>
         <% end %>
       <% end %>

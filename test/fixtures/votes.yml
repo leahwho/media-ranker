@@ -7,3 +7,6 @@ vote2:
 vote3:
   user_id: jared
   work_id: rising
+vote4:
+  user_id: leah
+  work_id: rising

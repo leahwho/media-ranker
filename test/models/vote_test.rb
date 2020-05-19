@@ -45,16 +45,39 @@ describe Vote do
       expect(duplicate_vote.valid?).must_equal false
       expect(duplicate_vote.errors.messages).must_include :work_id
     end
-    
+
   end
   
   describe 'relationships' do
     before do
+      @vote = votes(:vote3)
+      @work = works(:blackstar)
       @user = users(:katie)
-      @work = works(:oryx)
-      @vote = Vote.create(user_id: @user.id, work_id: @work.id)
     end
-    
+
+    it 'can set the work through .work' do
+      @vote.work = @work
+
+      expect(@vote.work_id).must_equal @work.id
+    end
+
+    it 'can set the work through .work_id' do
+      @vote.work_id = @work.id
+
+      expect(@vote.work).must_equal @work
+    end
+
+    it 'can set the user through .user' do
+      @vote.user = @user
+
+      expect(@vote.user_id).must_equal @user.id
+    end
+
+    it 'can set the user through .user_id' do
+      @vote.user_id = @user.id
+
+      expect(@vote.user).must_equal @user
+    end
     
   end
   

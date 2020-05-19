@@ -39,14 +39,5 @@ describe User do
       expect(new_user.errors.messages).must_include :username
     end
   end
-
-  describe 'relationships' do
-    # relationship to vote: a user can have many votes
-
-    # relationship to work: a user is related to works through votes
-
-  end
-  
-  
   
 end

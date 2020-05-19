@@ -1,11 +1,10 @@
 class VotesController < ApplicationController
   
   def create
-    # find the user and the work
     user = User.find_by(id: session[:user_id])
     work = Work.find_by(id: params[:work_id])
     
-    if user.nil? || work.nil? # if the work or user cannot be found
+    if user.nil? || work.nil?
       head :not_found
       return
     end
