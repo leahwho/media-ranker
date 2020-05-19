@@ -9,9 +9,9 @@ class WorksController < ApplicationController
   end
   
   def home 
-    @movies = Work.movies[0..10]
-    @books = Work.books[0..10]
-    @albums = Work.albums[0..10]
+    @movies = Work.movies[0..9]
+    @books = Work.books[0..9]
+    @albums = Work.albums[0..9]
     
     @spotlight = Work.media_spotlight
   end

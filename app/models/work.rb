@@ -1,7 +1,3 @@
-MOVIE = :movie
-ALBUM = :album
-BOOK = :book
-
 class Work < ApplicationRecord
   has_many :votes
   has_many :users, through: :votes
@@ -12,7 +8,6 @@ class Work < ApplicationRecord
   validates :description, presence: true
   validates :publication_year, presence: true, numericality: { only_integer: true } 
 
-  # @@valid_categories = [ALBUM, BOOK, MOVIE]
   
   def self.media_spotlight
     @spotlight = Work.all.sort_by { |work| work.votes.count }
@@ -31,16 +26,8 @@ class Work < ApplicationRecord
   end
   
   def self.albums
-    albums = Work.where(category: 'album').sort_by { |album| album.votes.count } # WOULD .ORDER("WORK.VOTES") WORK?
+    albums = Work.where(category: 'album').sort_by { |album| album.votes.count }
     return albums.reverse  
   end
-  
-  # def self.top_ten(category)
-  #   if !@@valid_categories.includes(category)
-  #     return
-  #   end
-
-  #   # logic for return the top ten CATEGORY in that category
-  # end
-  
+    
 end

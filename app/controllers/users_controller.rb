@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   
-  skip_before_action :require_login, only: [:login, :login_form]
-  before_action :find_user, only: [:current, :show, :logout]
   before_action :require_login, only: [:current]
+  before_action :find_user, only: [:current, :show, :logout]
+  
   
   def index
     @users = User.all
@@ -43,7 +43,6 @@ class UsersController < ApplicationController
     redirect_to root_path
     return
   end
-  
   
   def logout
     if session[:user_id]
