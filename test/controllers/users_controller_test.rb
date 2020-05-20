@@ -29,12 +29,12 @@ describe UsersController do
       
       must_respond_with :success
     end
-
+    
     it 'responds with 404 with an invalid user id' do
       id = 'sopapilla'
-
+      
       get user_path(id)
-
+      
       must_respond_with :not_found
     end
   end

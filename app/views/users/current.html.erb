@@ -1,1 +1,12 @@
+<section class='users'>
 <h2>You are logged in as <%= @user.username %> </h2>
+
+<section class='user_photo'>
+<%= image_tag('https://picsum.photos/200', alt: "a random photo", class: 'photo') %>
+</section>
+
+<%= link_to 'Top Media', root_path, class: 'btn btn-primary' %>
+<%= link_to 'Add Media', new_work_path, class: 'btn btn-primary'%>
+<%= link_to 'Your User Page', user_path(@user.id), class: 'btn btn-primary' %>
+<%= link_to 'All Users', users_path, class: 'btn btn-primary'%>
+</section>

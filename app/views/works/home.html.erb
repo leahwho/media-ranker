@@ -1,13 +1,13 @@
 <section class='spotlight'>
   <h2 class='spotlight-header'>
-    <span class="spotlight__header--prefix">Media Spotlight:</span> <%= link_to @spotlight.title, work_path(@spotlight.id, class: "spotlight__link-to") %> </h2> <p class="spotlight__description"><%= @spotlight.votes.count %> votes - <%= @spotlight.description %> </p>
+    <span class="spotlight__header--prefix">Media Spotlight:</span> <%= link_to @spotlight.title, work_path(@spotlight.id, class: "spotlight__link-to") %> by <%= @spotlight.creator %> </h2><p class="spotlight__description"><%= @spotlight.votes.count %> votes - <%= @spotlight.description %> </p>
 </section>
 
-
 <section class="top-ten__container">
-  <section class='top-ten__header'>
-  <%= render partial: 'topten', locals: {category: @books, name: "Books"} %>
-  <%= render partial: 'topten', locals: {category: @movies, name: "Movies"}%>
-  <%= render partial: 'topten', locals: {category: @albums, name: "Albums"}%>
-  </section>    
+  <section class='top-ten__list-container'>
+    <%= render partial: 'topten', locals: {category: @albums, name: "Albums", class: 'list-group top_ten__list'}%> </section>
+  <section class='top-ten__list-container'>
+    <%= render partial: 'topten', locals: {category: @books, name: "Books"}, class: 'list-group top_ten__list' %> </section>
+  <section class='top-ten__list-container'>
+    <%= render partial: 'topten', locals: {category: @movies, name: "Movies", class: 'list-group top_ten__list'}%> </section>
 </section>

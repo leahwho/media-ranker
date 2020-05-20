@@ -1,11 +1,10 @@
-<h2>All Media on Media Ranker!</h2>
+<section class='index'>
+  <h2>All Media on Media Ranker!</h2>
 
-<%= render partial: 'all_index', locals: {category: @albums, name: "Albums"} %>
-<%= render partial: 'all_index', locals: {category: @books, name: "Books"} %>
-<%= render partial: 'all_index', locals: {category: @movies, name: "Movies"} %>
-
+  <%= render partial: 'all_index', locals: {category: @albums, name: "Albums"} %>
+  <%= render partial: 'all_index', locals: {category: @books, name: "Books"} %>
+  <%= render partial: 'all_index', locals: {category: @movies, name: "Movies"} %>
 
 <%= link_to 'Top Media', root_path, class: 'btn btn-primary' %>
 <%= link_to 'Add Media', new_work_path, class: 'btn btn-primary'%>
-
-</main>
+</section>

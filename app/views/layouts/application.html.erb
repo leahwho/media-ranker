@@ -13,10 +13,10 @@
     <header class='app-header'>
       <h1 class='app-header__header'>
         <%= link_to 'Media Ranker', root_path %>
-        <small>Ranking the Best of Everything</small>
+        <small class='smalsies'>Ranking the Best of Everything</small>
       </h1>
 
-      <nav class="navbar navbar-expand-lg">
+      <nav class="app-header__nav">
         <ul class="nav app-header__site-nav-container">
           <li class="navbar-text">
             <%= link_to 'View Top Media', root_path %>
@@ -35,23 +35,23 @@
         <ul class="nav app-header__user-nav-container">
         <% if session[:user_id] %> <%# this really should be if @user.nil?%>
           <li class="navbar-text">
-          <%= link_to "Logged in as #{session[:username]}", user_path(id: session[:user_id])%> <%# I imagine this will be similar to above %>
+          <%= link_to "Logged in as #{session[:username]}", current_user_path(id: session[:user_id]), class: 'btn btn-primary' %> <%# I imagine this will be similar to above %>
           </li>
           <li class="navbar-text">
-            <%= link_to 'Logout', logout_path, method: :post %>
+            <%= link_to 'Logout', logout_path, method: :post, class: 'btn btn-primary' %>
           <li/>
         <% else %>
           <li class="navbar-text">
-            <%= link_to 'Log In', login_path %>
+            <%= link_to 'Log In', login_path, class: 'btn btn-primary' %>
           </li>
         <% end %>
         </ul>
       </nav>
     </header>
 
-    <section class='errors'>
+    <section class='alert__container'>
       <% flash.each do |name, message| %>
-        <strong class="alert alert-<%= name %>" ><%= message %></strong>
+        <div class="alert alert-<%= name %>"><%= message %></div>
       <% end %>
 
       <% if @work %>

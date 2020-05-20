@@ -90,9 +90,19 @@ describe Work do
         expect(Work.books).must_include works(:oryx)
       end
       
-      it "sorts categories by vote count" do
-        # expect specific 
+      it "returns categories sorted by high to low vote count" do      
+        Vote.create!(user_id: users(:katie).id, work_id: works(:moonstruck).id)
+        Vote.create!(user_id: users(:leah).id, work_id: works(:moonstruck).id)
+        Vote.create!(user_id: users(:jared).id, work_id: works(:moonstruck).id)
+        Vote.create!(user_id: users(:katie).id, work_id: works(:brazil).id)
 
+        puts Work.movies[0].title
+        puts Work.movies[0].votes.count
+        puts Work.movies[1].title
+        puts Work.movies[1].votes.count
+
+        expect(Work.movies[0].title).must_equal 'Moonstruck'
+        expect(Work.movies[1].title).must_equal 'Brazil'
       end
 
     end

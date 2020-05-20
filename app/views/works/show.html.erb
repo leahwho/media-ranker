@@ -1,4 +1,4 @@
-<section>
+<section class='show'>
   <h2><%= @work.title %></h2>
     <p> Created by: <%= @work.creator %></p>
     <p> Published: <%= @work.publication_year %></p>
@@ -8,10 +8,8 @@
     <%= link_to 'Back to media ranks', works_path, class: "btn btn-primary" %>
     <%= link_to 'Edit', edit_work_path(@work.id), class: "btn btn-primary" %>
     <%= link_to 'Upvote', work_votes_path(@work.id), class: "btn btn-primary", method: :post %>
-    <%= link_to 'Delete This Thang', work_path(@work.id), class: "btn btn-primary", method: :delete, data: {confirm: "Are you sure?"} %>
+    <%= link_to 'Delete This Thang', work_path(@work.id), class: "btn btn-danger", method: :delete, data: {confirm: "Are you sure?"} %>
   </section>
-</section>
-
 
 
 <section class='works-votes__container'>
@@ -31,4 +29,6 @@
     <% end %>
     
   </table>
+</section>
+
 </section>

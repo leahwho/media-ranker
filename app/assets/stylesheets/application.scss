@@ -15,16 +15,36 @@
     @import "bootstrap";
     @import "**/*";
 
-    .app-header {
-      text-align: center;
-      padding: 50px 20px 20px;
-      background-color: #A3BBA3;
-      margin-bottom: 15px;
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #212529;
+      text-align: left;
+      background-color: #fff;
     }
 
-    .app-header__header {
-      padding: 20px;
-      color: #383447;
+    .app-header {
+      max-width: 100%;
+      background-color: #B2DFDB;
+      margin-bottom: 0.5rem;
+      padding: 2rem 1rem 0.5rem 1rem;
+      text-align: center;
+    }
+
+  
+    .app-header__header a {
+      color: #FF5722;
+      border-right: white 2px solid;
+      padding-right: 25px;
+      margin-right: 15px;
+      text-decoration: none;
+    }
+
+    .smalsies {
+      color: white;
     }
 
     .navbar {
@@ -33,16 +53,94 @@
 
     .navbar-text {
       padding: 10px;
+      color: #00796B;
+    }
+
+    .btn-primary {
+      color: #00796B;
+    }
+
+    .app-header__nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
     }
 
     .app-header__user-nav-container {
-      text-align: right;
+      display: flex;
+      flex-wrap: wrap;
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
     }
 
-    .navbar-expand-lg a {
-      color: #383447;
+    a {
+      color: #26A69A;
     }
 
-    
+    .btn-primary {
+      background-color: #26A69A;
+      border-color: #26A69A;
+      color: white;
+    }
 
+    .btn-primary:hover {
+      background-color: rgba(41, 103, 95, 0.783);
+      border-color: rgba(41, 103, 95, 0.783);
+    }
+
+    .btn-danger:hover {
+      background-color: rgba(154, 32, 24, 0.783);
+      border-color: rgba(154, 32, 24, 0.783);
+    }
+
+    .alert__container {
+      margin: 2rem 0 1rem 0;
+    }
+
+    .alert {
+      position: relative;
+      padding: 0.75rem 1.25rem;
+      margin-bottom: 1rem;
+      border: 1px solid transparent;
+          border-top-color: transparent;
+          border-right-color: transparent;
+          border-bottom-color: transparent;
+          border-left-color: transparent;
+      border-radius: 0.25rem;
+    }
     
+    .alert-success {
+      color: #155724;
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+    }
+
+    .alert-notice {
+      color: orange;
+      background-color: lightgoldenrodyellow;
+      border-color: lightgoldenrodyellow;
+    }
+
+    .alert-error {
+      color: black;
+      background-color: lightcoral;
+      border-color: lightcoral;
+    }
+
+    section {
+      display: block;
+    }
+
+    .photo {
+      border-radius: 50%;
+      padding: 20px;
+    }

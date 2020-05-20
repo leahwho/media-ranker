@@ -1,9 +1,10 @@
+<section class="form">
 <h2><%= title %> <%= category %></h2>
   <section>
     <%= form_with model: @work  do |f| %>
       <div class='form-group'>
         <%= f.label :category %>
-        <%= f.select :category, [[nil,nil],['album', 'album'], ['book', 'book'], ['movie', 'movie']], class: 'form-control' %>
+        <%= f.select :category, [[nil],['album'], ['book'], ['movie']], class: 'form-control' %>
       </div>
 
       <div class='form-group'>
@@ -31,4 +32,5 @@
       </div>
 
     <% end %>
+  </section>
   </section>
