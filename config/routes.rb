@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'works#home'
   
   resources :works do
-    resources :votes # what routes do you need for votes? - for sure need create
+    resources :votes, only: [:create]
   end
   
   # custom routes for user - don't move these!
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   post '/logout', to: 'users#logout', as: 'logout'
   
   resources :users, only: [:index, :show, :new, :create] do 
-    resources :votes # what routes do you need for votes? only index?
+    resources :votes, only: [:create]
   end
   
 end

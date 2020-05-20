@@ -52,7 +52,7 @@ describe UsersController do
       must_respond_with :success
     end
     
-    it 'redirects us back if the user is not logged in' do
+    it 'redirects if the user is not logged in' do
       get current_user_path
       
       must_respond_with :redirect
@@ -61,5 +61,5 @@ describe UsersController do
   end
   
 
-  
+
 end
