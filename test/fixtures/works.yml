@@ -1,36 +1,36 @@
 brazil:
   title: Brazil
-  category: Movie
+  category: movie
   creator: Terry Gilliam
   description: Original, absorbing dark comedy about daydreaming civil servant
   publication_year: 1985
 moonstruck:
   title: Moonstruck
-  category: Movie
+  category: movie
   creator: Norman Jewison
   description: The moon hits your eye like a big pizza pie in Moonstruck, and a lot of other things do too
   publication_year: 1987
 overstory:
   title: The Overstory
-  category: Book
+  category: book
   creator: Richard Powers
   description: This ambitious novel soars up through the canopy of American literature and remakes the landscape of environmental fiction
   publication_year: 2018
 oryx:
   title: Oryx & Crake
-  category: Movie
+  category: book
   creator: Margaret Atwood
   description: In this futuristic work, mankind, through its own devious devices, finds itself on the brink of extinction.
   publication_year: 2003
 blackstar:
   title: Blackstar
-  category: Album
+  category: album
   creator: David Bowie
   description: Blackstar has David Bowie embracing his status as a no-fucks icon, clutching onto remnants from the past as exploratory jazz and the echos of various mad men soundtrack his freefall.
   publication_year: 2016
 rising:
   title: Titanic Rising
-  category: Album
+  category: album
   creator: Weyes Blood
   description: Natalie Mering’s fourth album is a grand, sentimental ode to living and loving in the shadow of doom. It is her most ambitious and complex work yet.
   publication_year: 2019

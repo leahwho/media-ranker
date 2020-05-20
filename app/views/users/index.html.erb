@@ -10,8 +10,8 @@
      
     <% @users.each do |user| %>
       <tr>
-        <td><%= link_to user.username, user_path(user) %></td>
-        <td># of votes herrrre</td>
+        <td><%= link_to user.username, user_path(user.id) %></td>
+        <td> <%= user.votes.count %></td>
         <td><%= user.created_at.strftime("%m/%d/%Y") %> </td>
       </tr>
     <% end %>

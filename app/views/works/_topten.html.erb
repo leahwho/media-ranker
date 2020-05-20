@@ -1,0 +1,13 @@
+<h2 class="top-ten__header"> Top <%= name %></h2>
+<ul class='list-group top_ten__list'>
+  <% if category.empty? %>
+    <li class="list-group-item">There are no works in the ranking system!  Would you like to add one?</li>
+  <% else %>
+    <% category.each do |item| %>
+      <li class='list-group-item'>
+        <h4><%= link_to item.title, work_path(item.id) %>
+        <small class='top-ten__creator'>by <%= item.creator %></small></h4>
+        <p><%= item.votes.count%> votes</p>
+    <% end %>
+  <% end %>
+</ul>

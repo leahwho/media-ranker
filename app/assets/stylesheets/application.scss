@@ -14,3 +14,35 @@
     /* Custom bootstrap variables must be set or imported *before* bootstrap. */
     @import "bootstrap";
     @import "**/*";
+
+    .app-header {
+      text-align: center;
+      padding: 50px 20px 20px;
+      background-color: #A3BBA3;
+      margin-bottom: 15px;
+    }
+
+    .app-header__header {
+      padding: 20px;
+      color: #383447;
+    }
+
+    .navbar {
+      margin: 0;
+    }
+
+    .navbar-text {
+      padding: 10px;
+    }
+
+    .app-header__user-nav-container {
+      text-align: right;
+    }
+
+    .navbar-expand-lg a {
+      color: #383447;
+    }
+
+    
+
+    

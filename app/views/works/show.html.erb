@@ -7,7 +7,7 @@
   <section>
     <%= link_to 'Back to media ranks', works_path, class: "btn btn-primary" %>
     <%= link_to 'Edit', edit_work_path(@work.id), class: "btn btn-primary" %>
-    <a class: "btn btn-primary"> TODO link to upvote </a>
+    <%= link_to 'Upvote', work_votes_path(@work.id), class: "btn btn-primary", method: :post %>
     <%= link_to 'Delete This Thang', work_path(@work.id), class: "btn btn-primary", method: :delete, data: {confirm: "Are you sure?"} %>
   </section>
 </section>
@@ -15,20 +15,20 @@
 
 
 <section class='works-votes__container'>
-  <h3 class='works-votes__header'>How many votes does this <%= @work.category %> have?</h3>
+  <h3 class='works-votes__header'><%= @work.votes.count %> votes for this <%= @work.category %> </h3>
   <table class='table'>
-    <thead>
+    
       <tr>
         <th>User</th>
         <th>Date</th>
       </tr>
-    </thead>
-    <tbody>
+    
+    <% @work.votes.recent_work_votes(@work.id).each do |vote| %>
       <tr> 
-        <td>LINK_TO What user voted for this?</td>
-        <td>When did they vote? </td>
+        <td> <%= link_to vote.user.username, user_path(vote.user_id) %> </td>
+        <td> <%= vote.created_at.strftime("%B %d, %Y") %> </td>
       </tr>
-    </tbody>
+    <% end %>
+    
   </table>
 </section>
-  

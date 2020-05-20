@@ -12,13 +12,15 @@
         <th>Voted On</th>
       </tr>
 
+  <% @user.votes.recent_user_votes(@user.id).each do |vote| %>
       <tr>
-        <td>Link to Media</td>
-        <td>Creator</td>
-        <td>Pub Yr</td>
-        <td>Category</td>
-        <td>Voted On</td>
+        <td> <%= link_to vote.work.title, work_path(vote.work_id) %> </td>
+        <td> <%= vote.work.creator %> </td>
+        <td> <%= vote.work.publication_year %> </td>
+        <td> <%= vote.work.category %> </td>
+        <td> <%= vote.created_at.strftime("%B %d, %Y")%> </td>
       </tr>
+  <% end %>
     </table>
 </section>
 

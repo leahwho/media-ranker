@@ -53,59 +53,50 @@ describe Work do
       expect(@work.valid?).must_equal false
       expect(@work.errors.messages).must_include :publication_year
     end
-
+    
     it 'is invalid if publication year is not a number' do
       @work.publication_year = 'taco'
       
       expect(@work.valid?).must_equal false
       expect(@work.errors.messages).must_include :publication_year
     end
-  end
-  
-  
-  describe 'relationships' do 
-    # TODO: What relationships will Works have with Votes and/or Users?
-    # TODO: Works can have many votes, but only one user through votes
-  end
-  
+  end 
   
   describe 'custom methods' do
     
     describe 'spotlight' do
-      # TODO it returns an instance of Work
-      # it returns a single item
-      # if there are no votes, it returns nil?
-      # When you have the method set for vote counts, test that it returns the right one (the one with the most votes)
+      it 'returns a single work' do
+        spotlight = Work.media_spotlight
+        
+        expect(spotlight).must_be_kind_of Work  
+      end
+      
+      it 'returns the correct work' do
+        new_vote = Vote.create!(user_id: users(:katie).id, work_id: works(:moonstruck).id)
+
+        expect(Work.media_spotlight.title).must_equal 'Moonstruck'
+
+        new_vote2 = Vote.create!(user_id: users(:jared).id, work_id: works(:blackstar).id)
+        new_vote3 = Vote.create!(user_id: users(:leah).id, work_id: works(:blackstar).id)
+        expect(Work.media_spotlight.title).must_equal 'Blackstar'
+      end     
+            
     end
     
-    describe 'movies' do
-      # TODO it returns an array
-      # it returns an array of Work objects
-      # all categories are 'movie'
-      # expect the count to be correct
-      # expect order to be correct
-      # expect empty array if nothing is listed
-    end
-    
-    describe 'books' do
-      # TODO it returns an array
-      # it returns an array of Work objects
-      # all categories are 'book'
-      # expect the count to be correct
-      # expect order to be correct
-      # expect empty array if nothing is listed
-    end
-    
-    describe 'albums' do
-      # TODO it returns an array
-      # it returns an array of Work objects
-      # all categories are 'album'
-      # expect the count to be correct
-      # expect order to be correct
-      # expect empty array if nothing is listed
+    describe 'categories' do
+      it "puts work into correct category" do
+        expect(Work.movies).must_include works(:brazil)
+        expect(Work.albums).must_include works(:blackstar)
+        expect(Work.books).must_include works(:oryx)
+      end
+      
+      it "sorts categories by vote count" do
+        # expect specific 
+
+      end
+
     end
     
   end
-  
 end
-
+  

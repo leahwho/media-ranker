@@ -1,5 +1,7 @@
 class WorksController < ApplicationController
   
+  before_action :find_work, only: [:destroy, :show, :edit, :update]
+
   def index 
     @movies = Work.movies
     @books = Work.books
@@ -7,16 +9,14 @@ class WorksController < ApplicationController
   end
   
   def home 
-    @movies = Work.movies[0..10]
-    @books = Work.books[0..10]
-    @albums = Work.albums[0..10]
+    @movies = Work.movies[0..9]
+    @books = Work.books[0..9]
+    @albums = Work.albums[0..9]
     
     @spotlight = Work.media_spotlight
   end
   
-  def show 
-    @work = Work.find_by(id: params[:id])
-    
+  def show     
     if @work.nil?
       head :not_found
       return
@@ -35,24 +35,20 @@ class WorksController < ApplicationController
       redirect_to work_path(@work.id)
       return
     else 
-      flash.now[:error] = "A problem occurred: This #{@work.category} could not be created."
+      flash.now[:danger] = "A problem occurred: This #{@work.category} could not be created."
       render :new, status: :bad_request
       return
     end
   end
   
-  def edit
-    @work = Work.find_by(id: params[:id])
-    
+  def edit    
     if @work.nil?
       head :not_found
       return
     end
   end
   
-  def update
-    @work = Work.find_by(id: params[:id])
-    
+  def update    
     if @work.nil?
       head :not_found
       return
@@ -61,15 +57,13 @@ class WorksController < ApplicationController
       redirect_to work_path(@work.id)
       return
     else
-      flash.now[:error] = "A problem occurred: This #{@work.category} could not be updated."
+      flash.now[:danger] = "A problem occurred: This #{@work.category} could not be updated."
       render :edit, status: :bad_request
       return
     end
   end
   
   def destroy
-    @work = Work.find_by(id: params[:id])
-    
     if @work.nil?
       head :not_found
       return
@@ -89,6 +83,9 @@ class WorksController < ApplicationController
   def works_params
     return params.require(:work).permit(:title, :category, :creator, :description, :publication_year)
   end
-  
+
+  def find_work
+    @work = Work.find_by(id: params[:id])
+  end
   
 end
