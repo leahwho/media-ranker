@@ -2,14 +2,53 @@ require "test_helper"
 
 describe UsersController do
   
-  it 'can get the login form' do
-    get login_path
+  describe 'index' do
+    it 'responds with success when many users are in the database' do
+      users(:leah)
+      users(:jared)
+      users(:katie)
+      
+      get users_path
+      
+      must_respond_with :success
+    end
     
-    must_respond_with :success
+    it 'responds with success when zero users are in the database' do
+      get users_path
+      
+      must_respond_with :success
+    end
+    
   end
   
+  describe 'show' do
+    it 'responds with success when showing existing and valid users' do
+      user = users(:katie)
+      
+      get user_path(user.id)
+      
+      must_respond_with :success
+    end
+
+    it 'responds with 404 with an invalid user id' do
+      id = 'sopapilla'
+
+      get user_path(id)
+
+      must_respond_with :not_found
+    end
+  end
+  
+  describe 'login_form' do
+    it 'can get the login form' do
+      get login_path
+      
+      must_respond_with :success
+    end
+  end
+  
+  
   describe 'logging in' do
-    
     it 'can login a new user' do
       user = nil
       
@@ -60,6 +99,6 @@ describe UsersController do
     end
   end
   
-
-
+  
+  
 end
