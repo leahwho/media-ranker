@@ -60,6 +60,7 @@ describe Work do
       expect(@work.valid?).must_equal false
       expect(@work.errors.messages).must_include :publication_year
     end
+
   end 
   
   describe 'custom methods' do

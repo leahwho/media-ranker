@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     resources :votes, only: [:create]
   end
   
-  # custom routes for user - don't move these!
   get '/users/current', to: 'users#current', as: 'current_user'
   get '/login', to: 'users#login_form', as: 'login'
   post '/login', to: 'users#login'

@@ -238,6 +238,24 @@ describe WorksController do
 
       must_respond_with :not_found
     end
+
+    it 'allows works with existing votes to be destroyed' do
+      work_to_delete = works(:oryx)
+
+      user1 = users(:leah)
+      user2 = users(:katie)
+      Vote.create(work_id: work_to_delete, user_id: user1.id)
+      Vote.create(work_id: work_to_delete, user_id: user2.id)
+
+      expect {
+        delete work_path(id: work_to_delete.id)
+      }.must_differ 'Work.count', -1
+
+      expect(flash[:success]).must_equal "#{work_to_delete.title} was successfully deleted."
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+    end
   end
   
 end
