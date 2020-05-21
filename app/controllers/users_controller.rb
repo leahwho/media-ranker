@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   before_action :require_login, only: [:current]
-  before_action :find_user, only: [:current, :logout]
+  before_action :find_user, only: [:current, :logout, :home]
   
   
   def index

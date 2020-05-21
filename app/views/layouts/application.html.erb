@@ -35,7 +35,7 @@
         <ul class="nav app-header__user-nav-container">
         <% if session[:user_id] %> <%# this really should be if @user.nil?%>
           <li class="navbar-text">
-          <%= link_to "Logged in as #{session[:username]}", current_user_path(id: session[:user_id]), class: 'btn btn-primary' %> <%# I imagine this will be similar to above %>
+          <%= link_to "Logged in as #{session[:username]}", current_user_path(id: session[:user_id]), class: 'btn btn-primary' %> 
           </li>
           <li class="navbar-text">
             <%= link_to 'Logout', logout_path, method: :post, class: 'btn btn-primary' %>
@@ -57,7 +57,7 @@
       <% if @work %>
         <% if @work.errors.any? %>
           <% @work.errors.each do |column, message| %>
-            <%= flash.now[:details] = "#{column.capitalize} #{message}."%>
+            <div class="alert alert-danger"><%= flash.now[:details] = "#{column.capitalize} #{message}."%></div>
           <% end %>
         <% end %>
       <% end %>
