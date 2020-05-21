@@ -62,6 +62,33 @@ describe Work do
     end
 
   end 
+
+  describe 'relationships' do
+    it 'a work can have many votes' do
+      work = works(:overstory)
+
+      vote1 = Vote.create(work_id: work.id, user_id: users(:katie).id)
+      vote2 = Vote.create(work_id: work.id, user_id: users(:leah).id)
+      vote3 = Vote.create(work_id: work.id, user_id: users(:jared).id)
+
+      [vote1, vote2, vote3].each do |vote|
+        expect(vote.valid?).must_equal true
+      end
+
+      expect(work.votes.count).must_equal 3      
+    end
+
+    it 'can access user through votes' do
+      user1 = users(:katie)
+      user2 = users(:leah)
+      work = works(:blackstar)
+      Vote.create(work_id: work.id, user_id: user1.id)
+      Vote.create(work_id: work.id, user_id: user2.id)
+
+      expect(work.votes[0].user.username).must_equal user1.username
+      expect(work.votes[1].user.username).must_equal user2.username
+    end
+  end
   
   describe 'custom methods' do
     
@@ -91,19 +118,34 @@ describe Work do
         expect(Work.books).must_include works(:oryx)
       end
       
-      it "returns categories sorted by high to low vote count" do      
-        Vote.create!(user_id: users(:katie).id, work_id: works(:moonstruck).id)
-        Vote.create!(user_id: users(:leah).id, work_id: works(:moonstruck).id)
-        Vote.create!(user_id: users(:jared).id, work_id: works(:moonstruck).id)
-        Vote.create!(user_id: users(:katie).id, work_id: works(:brazil).id)
-
-        puts Work.movies[0].title
-        puts Work.movies[0].votes.count
-        puts Work.movies[1].title
-        puts Work.movies[1].votes.count
+      it "returns movies sorted by high to low vote count" do
+        Vote.create(work_id: works(:moonstruck), user_id: users(:katie))
+        Vote.create(work_id: works(:moonstruck), user_id: users(:jared))
+        Vote.create(work_id: works(:brazil), user_id: users(:katie))
+        Vote.create(work_id: works(:moonstruck), user_id: users(:leah))
 
         expect(Work.movies[0].title).must_equal 'Moonstruck'
         expect(Work.movies[1].title).must_equal 'Brazil'
+      end
+
+      it "returns books sorted by high to low vote count" do
+        Vote.create(work_id: works(:oryx), user_id: users(:katie))
+        Vote.create(work_id: works(:oryx), user_id: users(:jared))
+        Vote.create(work_id: works(:overstory), user_id: users(:katie))
+        Vote.create(work_id: works(:oryx), user_id: users(:leah))
+
+        expect(Work.books[0].title).must_equal 'Oryx & Crake'
+        expect(Work.books[1].title).must_equal 'The Overstory'
+      end
+
+      it "returns albums sorted by high to low vote count" do
+        Vote.create(work_id: works(:rising), user_id: users(:katie))
+        Vote.create(work_id: works(:rising), user_id: users(:jared))
+        Vote.create(work_id: works(:blackstar), user_id: users(:katie))
+        Vote.create(work_id: works(:rising), user_id: users(:leah))
+
+        expect(Work.albums[0].title).must_equal 'Titanic Rising'
+        expect(Work.albums[1].title).must_equal 'Blackstar'
       end
 
     end
