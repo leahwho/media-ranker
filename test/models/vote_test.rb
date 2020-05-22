@@ -13,7 +13,7 @@ describe Vote do
   
   it 'has required fields' do
     [:work_id, :user_id].each do |field|
-      expect(votes(:vote1)).must_respond_to field
+      expect(@vote).must_respond_to field
     end
   end
   
@@ -58,9 +58,9 @@ describe Vote do
   
   describe 'relationships' do
     before do
-      @vote = votes(:vote3)
       @work = works(:blackstar)
       @user = users(:katie)
+      @vote = Vote.create(user_id: @user.id, work_id: @work.id)
     end
     
     it 'can set the work through .work' do
@@ -98,7 +98,7 @@ describe Vote do
         
         user = users(:katie)
         result = user.votes.recent_user_votes(user.id)
-
+       
         expect(result[0].created_at > result[1].created_at).must_equal true
       end
             

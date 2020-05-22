@@ -7,21 +7,12 @@ describe User do
   end
   
   it 'has required fields' do
-    
     expect(users(:jared)).must_respond_to :username
-    
   end
   
   describe 'validations' do
     before do
       @user = users(:katie)
-    end
-    
-    it 'is invalid without a username' do
-      @user.username = ''
-      
-      expect(@user.valid?).must_equal false
-      expect(@user.errors.messages).must_include :username
     end
     
     it 'is invalid without a username' do
