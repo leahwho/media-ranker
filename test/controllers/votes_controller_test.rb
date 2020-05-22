@@ -43,7 +43,6 @@ describe VotesController do
       user = users(:katie)
       login(user.username)
       work = works(:oryx)
-      # new_vote = Vote.create(user_id: user.id, work_id: work.id)
       
       vote_info = {
         vote: {

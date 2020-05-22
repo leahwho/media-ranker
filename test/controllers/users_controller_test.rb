@@ -4,16 +4,17 @@ describe UsersController do
   
   describe 'index' do
     it 'responds with success when many users are in the database' do
-      users(:leah)
-      users(:jared)
-      users(:katie)
-      
       get users_path
       
       must_respond_with :success
     end
     
     it 'responds with success when zero users are in the database' do
+      users = User.all
+      users.each do |user|
+        user.destroy
+      end
+
       get users_path
       
       must_respond_with :success
@@ -23,9 +24,7 @@ describe UsersController do
   
   describe 'show' do
     it 'responds with success when showing existing and valid users' do
-      user = users(:katie)
-      
-      get user_path(user.id)
+      get user_path(users(:katie).id)
       
       must_respond_with :success
     end
@@ -98,7 +97,4 @@ describe UsersController do
       expect(flash[:error]).must_equal "Sorry, you need to be logged in to do that."
     end
   end
-  
-  
-  
 end

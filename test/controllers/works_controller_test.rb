@@ -3,16 +3,18 @@ require "test_helper"
 describe WorksController do
   
   describe 'index' do
-    it 'responds with success when there are many works saved' do
-      works(:oryx)
-      works(:blackstar)
-      
+    it 'responds with success when there are many works saved' do    
       get works_path
       
       must_respond_with :success
     end
     
     it 'responds with success when there are no works saved' do
+      works = Work.all
+      works.each do |work|
+        work.destroy
+      end
+
       get works_path
       
       must_respond_with :success
@@ -21,17 +23,21 @@ describe WorksController do
   
   describe 'home' do
     it 'responds with success when there are works saved in each category' do
-      works(:oryx)
-      works(:blackstar)
-      works(:brazil)
-      
       get root_path
       
       must_respond_with :success
     end
     
     it 'responds with success when there are works in only one category' do
-      works(:oryx)
+      movies = Work.where(category: 'movie')
+      movies.each do |movie|
+        movie.destroy
+      end
+
+      books = Work.where(category: 'book')
+      books.each do |book|
+        book.destroy
+      end
       
       get root_path
       
@@ -39,6 +45,11 @@ describe WorksController do
     end
     
     it 'responds with success when there are no works in any category' do
+      works = Work.all
+      works.each do |work|
+        work.destroy
+      end
+      
       get root_path
       
       must_respond_with :success
@@ -47,9 +58,7 @@ describe WorksController do
   
   describe 'show' do
     it 'responds with success when showing existing and valid work' do
-      work = works(:overstory)
-      
-      get work_path(work.id)
+      get work_path(works(:overstory).id)
       
       must_respond_with :success
     end
@@ -96,8 +105,6 @@ describe WorksController do
       
       must_respond_with :redirect
       must_redirect_to work_path(new_work.id)
-      
-      
     end
     
     it 'does not create a new work if form data violates validations' do
