@@ -31,19 +31,19 @@
             <%= link_to 'View All Users', users_path %>
           </li>
         </ul>
-        
+
         <ul class="nav app-header__user-nav-container">
-        <% if session[:user_id] %> <%# this really should be if @user.nil?%>
+        <% if session[:user_id] %>
           <li class="navbar-text">
           <%= link_to "Logged in as #{session[:username]}", current_user_path(id: session[:user_id]), class: 'btn btn-primary' %> 
           </li>
           <li class="navbar-text">
-            <%= link_to 'Logout', logout_path, method: :post, class: 'btn btn-primary' %>
+            <%= link_to 'Logout', logout_path, method: "delete", class: 'btn btn-primary' %>
           <li/>
         <% else %>
         <%# TODO: Update link to use github path %>
           <li class="navbar-text">
-            <%= link_to 'Log In', login_path, class: 'btn btn-primary' %>
+            <%= link_to 'Log In With GitHub!', github_login_path, class: 'btn btn-primary' %>
           </li>
         <% end %>
         </ul>

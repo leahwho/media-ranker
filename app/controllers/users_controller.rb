@@ -16,51 +16,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def login_form
-    @users = User.new
-  end
-  
-  def login
-    @user = User.find_by(username: params[:username])
-    
-    if @user # existing user
-      session[:user_id] = @user.id
-      session[:username] = @user.username
-      flash[:success] = "Login successful. Welcome back, #{@user.username}."
-    elsif @user.nil? # new user
-      @user = User.create!(username: params[:username])
-      if @user.id
-        @user.reload
-        session[:user_id] = @user.id
-        session[:username] = @user.username
-        flash[:success] = "Login successful. Welcome, #{@user.username}. So glad you joined us!"
-      else
-        flash.now[:error] = 'Unable to login'
-        redirect_to root_path
-        return
-      end
-    end
-    
-    redirect_to root_path
-    return
-  end
-  
-  def logout
-    if session[:user_id]
-      unless @user.nil?
-        session[:user_id] = nil
-        session[:username] = nil
-        flash[:notice] = "Bye, #{@user.username}.  See you next time."
-      else
-        session[:user_id] = nil
-        session[:username] = nil
-        flash[:notice] = "Error: Unknown User"
-      end
-    end
-    
-    redirect_to root_path
-  end
-  
   def current
     if @user.nil?
       flash[:error] = "You must be logged in to view this page."
@@ -82,11 +37,22 @@ class UsersController < ApplicationController
         flash[:success] = "Logged in as new user #{user.username}"
       else
         flash[:error] = "Could not create new user account: #{user.errors.messages}"
-        return redirect_to root_path
+        redirect_to root_path
+        return 
       end
     end
     
     session[:user_id] = user.id
+    session[:username] = user.username
+    redirect_to root_path
+    return
+  end
+
+  def destroy
+    session[:user_id] = nil
+    session[:username] = nil
+    flash[:success] = "Successfully logged out!"
+
     redirect_to root_path
   end
   
