@@ -1,6 +1,12 @@
 leah:
   username: Leah
+  uid: 1
+  provider: github
 jared:
   username: Jared
+  uid: 2
+  provider: github
 katie:
   username: Katie
+  uid: 3
+  provider: github
